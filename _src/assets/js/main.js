@@ -26,7 +26,7 @@ function preventDefault(event){
 
 //2. Pedir los datos a la api según el valor del input.
 
-let searchList = null;
+let searchList = new Object();
 const selectedContent = readLocalStorage();
 
 function loadResults(){
@@ -34,15 +34,17 @@ function loadResults(){
       .then(response => response.json())
       .then(data => {
         searchList = data;
-        console.log(searchList)
+        console.log(`this is ${searchList}`);
+        console.log(searchList);
         renderList(searchList); 
-        //renderFavourites(selectedMovies); 
+       // renderFavs(selectedContent); 
       })
   }
 
 //3. Pintar el contenid que devuelve la API en un listado.
 
 //bonus: cambiar el innerHTML por metodo avanzado de DOM
+//cambiar estilo a favoritos
 
 function renderList(arr){
     for(let item of arr) {
@@ -86,16 +88,31 @@ function readLocalStorage(){
     console.log(selected);
     selectedContent.push(selected);
     setLocalInfo();
+    renderFavs(selectedContent);
+    console.log(selectedContent);
 }
 
-
 // función que se quede con el id del objeto
+ //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera
+function getSelectedObj(id){
+    console.log(searchList)
+    return searchList.find( serie => serie.show.id  === parseInt(id)) 
+}
 
-function getMovieObj(id){
-    return resultList.find(show => show.id === id) 
-    //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera
+//8. Pintar favoritos en otra ul 
+
+function renderFavs(favArr){
+  favList.innerHTML ='';
+  for(let favourite of favArr) {
+    const object = getSelectedObj(selectedContent);
+    console.log(favourite)
+    if(favourite == object.show.id){
+      favList.innerHTML += `<li id=${object.show.id}><button> borrar </button><img //src='${object.show.image}'> <h3> ${object.show.name} </h3></li>` //Aqui falta por meter el contenido que se va a mostrar
+    }
+  }
 }
 
 
 // 1. Al pulsar el boton se ejecuta la función que guarda lo que hay dentro del input en una variable
 submitButton.addEventListener('click', searchAction)
+submitButton.addEventListener('click', preventDefault)
