@@ -1,4 +1,24 @@
 .aside{
+    padding: 0px 40px 40px 0px;
     width: 100%;
     background-color: lightyellow;
+}
+
+.favList-item{ //es el li
+    padding: 40px 20px 0px 40px;
+    display: inline-block;
+
+    &_img{ //imd del li
+        width: 180px;
+    }
+
+    &_title{
+        font-size: 24px;
+    }
+    
+    .fav-button{ // title del li
+        padding-top:5px;
+        font-size: 20px;
+        max-width: 200px;
+    }
 }

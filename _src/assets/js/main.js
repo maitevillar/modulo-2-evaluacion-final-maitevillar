@@ -26,7 +26,7 @@ function preventDefault(event){
 
 //2. Pedir los datos a la api según el valor del input.
 
-let searchList = new Object();
+let searchList = null;
 const selectedContent = readLocalStorage();
 
 function loadResults(){
@@ -37,7 +37,7 @@ function loadResults(){
         console.log(`this is ${searchList}`);
         console.log(searchList);
         renderList(searchList); 
-       // renderFavs(selectedContent); 
+        renderFavs(selectedContent); 
       })
   }
 
@@ -47,7 +47,7 @@ function loadResults(){
 //cambiar estilo a favoritos
 
 function renderList(arr){
-    for(let item of arr) {
+      for(let item of arr) {
       resultList.innerHTML +=  
       `<li id="${item.show.id}" class='resultList-item'> <img class='resultList-item_img' src="${item.show.image.medium}"> </img> <p class='resultList-item_title'>${item.show.name}</p></li>`
       addClickListeners();
@@ -85,34 +85,58 @@ function readLocalStorage(){
 
  function selectItems(evt){
     const selected = evt.currentTarget.id;
-    console.log(selected);
+    console.log(selected); //cambia
     selectedContent.push(selected);
     setLocalInfo();
     renderFavs(selectedContent);
-    console.log(selectedContent);
+    removeMovie();
 }
 
 // función que se quede con el id del objeto
  //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera
 function getSelectedObj(id){
-    console.log(searchList)
-    return searchList.find( serie => serie.show.id  === parseInt(id)) 
+    console.log(searchList);
+    return searchList.find( serie => serie.show.id === parseInt(id)) 
 }
 
 //8. Pintar favoritos en otra ul 
 
 function renderFavs(favArr){
-  favList.innerHTML ='';
+  favList.innerHTML = '';
   for(let favourite of favArr) {
-    const object = getSelectedObj(selectedContent);
     console.log(favourite)
+    const object = getSelectedObj(favourite);
+    console.log(object);
     if(favourite == object.show.id){
-      favList.innerHTML += `<li id=${object.show.id}><button> borrar </button><img //src='${object.show.image}'> <h3> ${object.show.name} </h3></li>` //Aqui falta por meter el contenido que se va a mostrar
-    }
+      console.log(object.show.id)
+      favList.innerHTML += `<li class='favList-item'id=${object.show.id}> <img class='favList-item_img' src='${object.show.image.medium}' width='180px;'> <p class='favList-item_title'> ${object.show.name} </p> <button class='fav-button'> borrar </button></li>`;
+      addFavouriteListeners();
+   }
   }
 }
 
+//añado los listeners los botones de borrar
+function addFavouriteListeners(){
+  const liListElem = document.querySelectorAll('.fav-button');
+  for(let li of liListElem) {
+    li.addEventListener('click', removeMovie);
+  }
+}
 
+//función que borra la película
+//me quedo con el id del li
+//me quedo con el índice
+//le paso a splice el índice y 1 como referencia  que elimino un elemento
+function removeMovie(evt){
+  const elemShow = evt.currentTarget.parentElement.id;
+  const elemIndex = selectedContent.indexOf(elemShow);
+  selectedContent.splice(elemIndex,1);
+  setLocalInfo();
+  renderFavs(selectedContent)
+}
+
+
+loadResults();
 // 1. Al pulsar el boton se ejecuta la función que guarda lo que hay dentro del input en una variable
 submitButton.addEventListener('click', searchAction)
-submitButton.addEventListener('click', preventDefault)
+submitButton.addEventListener('click', preventDefault )
