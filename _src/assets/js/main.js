@@ -27,7 +27,7 @@ function preventDefault(event){
 //2. Pedir los datos a la api según el valor del input.
 
 let searchList = null;
-const selectedItems = readLocalStorage();
+const selectedContent = readLocalStorage();
 
 function loadResults(){
     fetch(`http://api.tvmaze.com/search/shows?q=${inputValue}`)
@@ -48,7 +48,7 @@ function renderList(arr){
     for(let item of arr) {
       resultList.innerHTML +=  
       `<li id="${item.show.id}" class='resultList-item'> <img class='resultList-item_img' src="${item.show.image.medium}"> </img> <p class='resultList-item_title'>${item.show.name}</p></li>`
-      //addClickListeners();
+      addClickListeners();
     }
   }
 
@@ -56,22 +56,22 @@ function renderList(arr){
 //4 Hacer los listeners para detectar cuando se esté pinchando encima
 //para saber que me esta cogiendo, console.log()
 
-function addEventListeners(){
+function addClickListeners(){
     const liListElem = document.querySelectorAll('.resultList-item');
     for (let li of liListElem){
-        li.addEventListener('click', selectItem)
+        li.addEventListener('click', selectItems)
     }
 }
 
 // 5. guardar la informacion (.setItem) para guardar. Bajo el nombre 'selectedInfo' guardaré en formato JSON y convertire en un string lo que me devuelva la función 'selectedItems'
 function setLocalInfo(){
-    localStorage.setItem('selectedInfo', JSON.stringify(selectedItems));
+    localStorage.setItem('selectedItemInfo', JSON.stringify(selectedContent));
 }
 
 //6. leer la información (.getItem) para leer. ReadLocalStorage será el resultado de SelectedItems en formato Array.
 
 function readLocalStorage(){
-    let localInfo = JSON.parse(localStorage.getItem('selectedInfo'));
+    let localInfo = JSON.parse(localStorage.getItem('selectedItemInfo'));
     if(localInfo !== null){
       return localInfo;
     } else {
@@ -81,15 +81,21 @@ function readLocalStorage(){
 
 //7. REcoger el id del item clicado. con (.push) meter el contenido. // no entiendo muy bien poruqé va aqui el setLocalInfo y no al reves
 
- function selectedItems(evt){
+ function selectItems(evt){
     const selected = evt.currentTarget.id;
     console.log(selected);
-    selectedMovies.push(selected);
+    selectedContent.push(selected);
     setLocalInfo();
 }
 
+
+// función que se quede con el id del objeto
+
+function getMovieObj(id){
+    return resultList.find(show => show.id === id) 
+    //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera
+}
+
+
 // 1. Al pulsar el boton se ejecuta la función que guarda lo que hay dentro del input en una variable
 submitButton.addEventListener('click', searchAction)
-
-
-inputElem.addEventListener('keyup', searchAction)
