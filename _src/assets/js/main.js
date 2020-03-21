@@ -96,19 +96,20 @@ function readLocalStorage(){
  //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera
 function getSelectedObj(id){
     console.log(searchList);
-    return searchList.find( serie => serie.show.id === parseInt(id)) 
+    return searchList.find( show => n.show.id === id) 
 }
 
-//8. Pintar favoritos en otra ul 
+//8. Pintar favoritos en otra ul //favourite es un string - object es un objecto pero devuelve la id en numero
 
 function renderFavs(favArr){
   favList.innerHTML = '';
   for(let favourite of favArr) {
-    console.log(favourite)
     const object = getSelectedObj(favourite);
+
     console.log(object);
-    if(favourite == object.show.id){
-      console.log(object.show.id)
+    if( favourite == object.id){
+      console.log(object.show.id);
+      console.log(typeof(object.show.id));
       favList.innerHTML += `<li class='favList-item'id=${object.show.id}> <img class='favList-item_img' src='${object.show.image.medium}' width='180px;'> <p class='favList-item_title'> ${object.show.name} </p> <button class='fav-button'> borrar </button></li>`;
       addFavouriteListeners();
    }
