@@ -27,6 +27,7 @@ function preventDefault(event){
 //2. Pedir los datos a la api según el valor del input.
 
 let searchList = null;
+//let showList = null;
 const selectedContent = readLocalStorage();
 
 function loadResults(){
@@ -35,9 +36,10 @@ function loadResults(){
       .then(data => {
         searchList = data;
         console.log(`this is ${searchList}`);
-        console.log(searchList);
+        //const showList = searchList['show'];
+        //console.log(showList);
         renderList(searchList); 
-        renderFavs(selectedContent); 
+        //renderFavourites(selectedContent);
       })
   }
 
@@ -47,10 +49,16 @@ function loadResults(){
 //cambiar estilo a favoritos
 
 function renderList(arr){
+      resultList.innerHTML = '';
       for(let item of arr) {
-      resultList.innerHTML +=  
-      `<li id="${item.show.id}" class='resultList-item'> <img class='resultList-item_img' src="${item.show.image.medium}"> </img> <p class='resultList-item_title'>${item.show.name}</p></li>`
-      addClickListeners();
+      const showObj = item['show'];
+      console.log(showObj);
+        if(showObj.image === null){
+          resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV" alt="Img error" > <p class='resultList-item_title'>${showObj.name}</p></li>`
+        } else {
+         resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="${showObj.image.medium}" alt="Img error"> <p class='resultList-item_title'>${showObj.name}</p></li>`
+     }
+     addClickListeners();
     }
   }
 
@@ -65,7 +73,7 @@ function addClickListeners(){
     }
 }
 
-// 5. guardar la informacion (.setItem) para guardar. Bajo el nombre 'selectedInfo' guardaré en formato JSON y convertire en un string lo que me devuelva la función 'selectedItems'
+// 5. guardar la informacion (.setItem) para guardar. Bajo el nombre 'selectedInfo' guardaré en formato JSON y convertire en un string lo que me devuelva la función 'selectedContent'
 function setLocalInfo(){
     localStorage.setItem('selectedItemInfo', JSON.stringify(selectedContent));
 }
@@ -83,38 +91,48 @@ function readLocalStorage(){
 
 //7. REcoger el id del item clicado. con (.push) meter el contenido. // no entiendo muy bien poruqé va aqui el setLocalInfo y no al reves
 
- function selectItems(evt){
+function selectItems(evt){
     const selected = evt.currentTarget.id;
     console.log(selected); //cambia
+    if(selectedContent.indexOf(selected)=== -1){
     selectedContent.push(selected);
+    console.log(selectedContent) // es un array con las id's de las pelis seleccionadas(se ejecuta en setlocalinfo)
     setLocalInfo();
-    renderFavs(selectedContent);
+    }
+    //Ejecutar la funión para pintar en favoritos
+    renderFavourites(selectedContent);
     removeMovie();
 }
 
 // función que se quede con el id del objeto
- //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera
+ //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera para que me devuelva el objeto en el q está
+
 function getSelectedObj(id){
     console.log(searchList);
-    return searchList.find( show => n.show.id === id) 
+      return searchList.find( serie => serie.show.id === Number.parseInt(id) ) 
 }
+
 
 //8. Pintar favoritos en otra ul //favourite es un string - object es un objecto pero devuelve la id en numero
 
-function renderFavs(favArr){
+function renderFavourites(FArr){
   favList.innerHTML = '';
-  for(let favourite of favArr) {
-    const object = getSelectedObj(favourite);
-
+  for (let item of FArr){
+    const object  = getSelectedObj(item);
     console.log(object);
-    if( favourite == object.id){
-      console.log(object.show.id);
-      console.log(typeof(object.show.id));
-      favList.innerHTML += `<li class='favList-item'id=${object.show.id}> <img class='favList-item_img' src='${object.show.image.medium}' width='180px;'> <p class='favList-item_title'> ${object.show.name} </p> <button class='fav-button'> borrar </button></li>`;
+    console.log(item);
+    console.log(FArr);
+    const showObj = object['show'];
+    //console.log(showObj.id);
+    if( Number.parseInt(item) == showObj.id){
+     console.log('ENTROOOO')
+     favList.innerHTML += `<li class='favList-item'id=${showObj.id}> <img class='favList-item_img' src='${showObj.image.medium}' width='180px;'> <p class='favList-item_title'> ${showObj.name} </p> <button class='fav-button'> borrar </button></li>`;
       addFavouriteListeners();
-   }
+    }
   }
 }
+
+
 
 //añado los listeners los botones de borrar
 function addFavouriteListeners(){
@@ -129,15 +147,14 @@ function addFavouriteListeners(){
 //me quedo con el índice
 //le paso a splice el índice y 1 como referencia  que elimino un elemento
 function removeMovie(evt){
-  const elemShow = evt.currentTarget.parentElement.id;
-  const elemIndex = selectedContent.indexOf(elemShow);
+  const elemId = evt.currentTarget.parentElement.id;
+  const elemIndex = selectedContent.indexOf(elemId);
   selectedContent.splice(elemIndex,1);
   setLocalInfo();
-  renderFavs(selectedContent)
+  renderFavourites(selectedContent)
 }
 
-
-loadResults();
 // 1. Al pulsar el boton se ejecuta la función que guarda lo que hay dentro del input en una variable
 submitButton.addEventListener('click', searchAction)
-submitButton.addEventListener('click', preventDefault )
+submitButton.addEventListener('click', preventDefault)
+
