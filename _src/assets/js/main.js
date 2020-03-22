@@ -121,6 +121,8 @@ function selectItems(evt){
 function renderFavourites(FArr){
   favList.innerHTML = '';
   for (let item of FArr){
+    
+
      console.log('ENTROOOO')
      favList.innerHTML += `<li class='favList-item'id=${item.show.id}> <img class='favList-item_img' src='${item.show.image.medium}' width='180px;'> <p class='favList-item_title'> ${item.show.name} </p> <button class='fav-button'> borrar </button></li>`;
       addFavouriteListeners();
