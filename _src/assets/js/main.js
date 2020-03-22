@@ -89,27 +89,30 @@ function readLocalStorage(){
     }
  }
 
+
+ // función que se quede con el id del objeto
+ //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera para que me devuelva el objeto en el q está
+
+function getSelectedObj(id){
+  console.log(searchList);
+    return searchList.find( serie => serie.show.id === Number.parseInt(id) ) 
+}
+
 //7. REcoger el id del item clicado. con (.push) meter el contenido. // no entiendo muy bien poruqé va aqui el setLocalInfo y no al reves
 
 function selectItems(evt){
     const selected = evt.currentTarget.id;
-    console.log(selected); //cambia
+    const object  = getSelectedObj(selected);
+
     if(selectedContent.indexOf(selected)=== -1){
-    selectedContent.push(selected);
-    console.log(selectedContent) // es un array con las id's de las pelis seleccionadas(se ejecuta en setlocalinfo)
-    setLocalInfo();
+      selectedContent.push(object);
+      console.log(selectedContent) // es un array con las id's de las pelis seleccionadas(se ejecuta en setlocalinfo)
+      setLocalInfo();
+      renderFavourites(selectedContent);
     }
+    
     //Ejecutar la funión para pintar en favoritos
-    renderFavourites(selectedContent);
     removeMovie();
-}
-
-// función que se quede con el id del objeto
- //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera para que me devuelva el objeto en el q está
-
-function getSelectedObj(id){
-    console.log(searchList);
-      return searchList.find( serie => serie.show.id === Number.parseInt(id) ) 
 }
 
 
@@ -118,17 +121,9 @@ function getSelectedObj(id){
 function renderFavourites(FArr){
   favList.innerHTML = '';
   for (let item of FArr){
-    const object  = getSelectedObj(item);
-    console.log(object);
-    console.log(item);
-    console.log(FArr);
-    const showObj = object['show'];
-    //console.log(showObj.id);
-    if( Number.parseInt(item) == showObj.id){
      console.log('ENTROOOO')
-     favList.innerHTML += `<li class='favList-item'id=${showObj.id}> <img class='favList-item_img' src='${showObj.image.medium}' width='180px;'> <p class='favList-item_title'> ${showObj.name} </p> <button class='fav-button'> borrar </button></li>`;
+     favList.innerHTML += `<li class='favList-item'id=${item.show.id}> <img class='favList-item_img' src='${item.show.image.medium}' width='180px;'> <p class='favList-item_title'> ${item.show.name} </p> <button class='fav-button'> borrar </button></li>`;
       addFavouriteListeners();
-    }
   }
 }
 
