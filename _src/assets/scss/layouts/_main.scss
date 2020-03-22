@@ -1,7 +1,13 @@
+.page{
+    display: flex;
+    flex-direction: row;
+}
+
 .main{
-    padding: 0px 40px 40px 0px;
-    width: 100%;
-    background-color: lightpink;
+    flex-grow: 2;
+    padding: 0px 30px 30px 30px;
+    height: 100%;
+    background-color: rgb(235, 235, 235);
 }
 
 .resultList-item{ //es el li

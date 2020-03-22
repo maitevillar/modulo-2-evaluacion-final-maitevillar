@@ -121,12 +121,49 @@ function selectItems(evt){
 function renderFavourites(FArr){
   favList.innerHTML = '';
   for (let item of FArr){
-    
+  console.log('ENTROOOO');
+  
+  const li = document.createElement('li');
+  const img = document.createElement('img');
+  const text = document.createTextNode(item.show.name)
+  const span = document.createElement('span');
+  const div = document.createElement('div');
+  const favbutton = document.createElement('button');
+  const textButt = document.createTextNode('x');
 
-     console.log('ENTROOOO')
-     favList.innerHTML += `<li class='favList-item'id=${item.show.id}> <img class='favList-item_img' src='${item.show.image.medium}' width='180px;'> <p class='favList-item_title'> ${item.show.name} </p> <button class='fav-button'> borrar </button></li>`;
-      addFavouriteListeners();
+  img.setAttribute('class', 'favList-item_img');
+  img.setAttribute('alt', 'imagen de la serie');
+  img.setAttribute('width', '180px');
+  
+  //item.show.image.medium
+  if(item.show.image !== null && item.show.image !== undefined && item.show.image !== ''){
+    img.setAttribute('src', item.show.image.medium);
+  } else {
+    img.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV')
   }
+
+  span.appendChild(text);
+  favbutton.setAttribute('class', 'fav-button')
+
+  favbutton.appendChild(textButt)
+ 
+  span.setAttribute('class', 'favList-item_title');
+  div.setAttribute('class', 'favList-item_content')
+ 
+  div.appendChild(span);
+  div.appendChild(favbutton);
+
+  li.setAttribute('class', 'favList-item');
+  li.setAttribute('id', item.show.id)
+
+  li.appendChild(img);
+  li.appendChild(div);
+
+  favList.appendChild(li);
+
+    // favList.innerHTML += `<li class='favList-item'id=${item.show.id}> <img class='favList-item_img' src='${item.show.image.medium}' width='180px;'> <div> <span class='favList-item_title'> ${item.show.name} </span> <button class='fav-button'> x </button> </div></li>`;
+  }
+  addFavouriteListeners();
 }
 
 
@@ -155,3 +192,4 @@ function removeMovie(evt){
 submitButton.addEventListener('click', searchAction)
 submitButton.addEventListener('click', preventDefault)
 
+renderFavourites(selectedContent);
