@@ -2,3 +2,13 @@
 .hidden{
     display: none;
 }
+
+
+
+.clicked_heart{
+    background-image: url(../images/like.png);
+    margin-top:10px;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+}

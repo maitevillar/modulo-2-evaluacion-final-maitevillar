@@ -1,22 +1,18 @@
 'use strict';
 
-console.log('Hola que tal');
-
-
 const urlBase = 'http://api.tvmaze.com/search/shows?q=';
 const resultList = document.querySelector('.result-list');
 const favList = document.querySelector('.favourite-list');
 const inputElem = document.querySelector('#search-name');
 const submitButton = document.querySelector('#submit-button');
 
-//1. Guardar el valor del input en una constante y desabilitar el default del botón:
+//Guardar el valor del input en una constante y desabilitar el default del botón:
 
 let inputValue = inputElem.value;
 
 function searchAction(){
     preventDefault(event);
     inputValue = inputElem.value;
-    console.log(inputValue)
     loadResults();
 }
 
@@ -24,10 +20,9 @@ function preventDefault(event){
     event.preventDefault()
 }
 
-//2. Pedir los datos a la api según el valor del input.
+//Pedir los datos a la api según el valor del input.
 
 let searchList = null;
-//let showList = null;
 const selectedContent = readLocalStorage();
 
 function loadResults(){
@@ -35,32 +30,62 @@ function loadResults(){
       .then(response => response.json())
       .then(data => {
         searchList = data;
-        console.log(`this is ${searchList}`);
-        //const showList = searchList['show'];
-        //console.log(showList);
         renderList(searchList); 
-        //renderFavourites(selectedContent);
       })
   }
 
-//3. Pintar el contenid que devuelve la API en un listado.
-
-//bonus: cambiar el innerHTML por metodo avanzado de DOM
-//cambiar estilo a favoritos
+//Pintar el contenid que devuelve la API en un listado.
 
 function renderList(arr){
       resultList.innerHTML = '';
       for(let item of arr) {
+      
       const showObj = item['show'];
-      console.log(showObj);
-        if(showObj.image === null){
-          resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV" alt="Img error"> <span class="span-list"> <p class='resultList-item_title'>${showObj.name}</p> <img class="heart" src="./assets/images/like.png"> </span> </li>`
-        } else {
-         resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="${showObj.image.medium}" alt="Img"> <span class="span-list"> <p class='resultList-item_title'>${showObj.name}</p> <img class="heart" src="./assets/images/like.png"> </span> </li>`
-     }
-     addClickListeners();
+   
+          const li = document.createElement('li');
+          const img = document.createElement('img');
+          const img2 = document.createElement('img');
+          const div = document.createElement('div');
+          const p = document.createElement('p');
+
+          const text = document.createTextNode(showObj.name)
+
+          img.setAttribute('class', 'resultList-item_img');
+          img.setAttribute('alt', 'imagen de la serie');
+
+          img2.setAttribute('class', 'resultList-item_heart');
+          img2.setAttribute('alt', 'icon');
+          
+          if(showObj.image !== null && showObj.image !== undefined && showObj.image !== ''){
+            img.setAttribute('src', showObj.image.medium);
+          } else {
+            img.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV')
+          }
+
+          p.appendChild(text);
+          img2.setAttribute('class', 'resultList-item_heart')
+
+
+          img2.setAttribute('src', './assets/images/like.png')
+        
+          p.setAttribute('class', 'resultList-item_title');
+          div.setAttribute('class', 'resultList-item_content')
+        
+        
+          div.appendChild(p);
+          div.appendChild(img2);
+
+          li.setAttribute('class', 'resultList-item');
+          li.setAttribute('id', item.show.id)
+
+          li.appendChild(img);
+          li.appendChild(div);
+
+          resultList.appendChild(li);
+
+          addClickListeners();
+        }
     }
-  }
 
 
 //4 Hacer los listeners para detectar cuando se esté pinchando encima
@@ -68,18 +93,17 @@ function renderList(arr){
 
 function addClickListeners(){
     const liListElem = document.querySelectorAll('.resultList-item');
-    const heart = document.querySelectorAll('heart');
     for (let li of liListElem){
         li.addEventListener('click', selectItems)
     }
 }
 
-// 5. guardar la informacion (.setItem) para guardar. Bajo el nombre 'selectedInfo' guardaré en formato JSON y convertire en un string lo que me devuelva la función 'selectedContent'
+//gGuardar la informacion (.setItem) para guardar. Bajo el nombre 'selectedInfo' guardaré en formato JSON y convertire en un string lo que me devuelva la función 'selectedContent'
 function setLocalInfo(){
     localStorage.setItem('selectedItemInfo', JSON.stringify(selectedContent));
 }
 
-//6. leer la información (.getItem) para leer. ReadLocalStorage será el resultado de SelectedItems en formato Array.
+//(.getItem) para leer. ReadLocalStorage será el resultado de SelectedItems en formato Array.
 
 function readLocalStorage(){
     let localInfo = JSON.parse(localStorage.getItem('selectedItemInfo'));
@@ -95,11 +119,10 @@ function readLocalStorage(){
  //le paso el objeto que itera(id) - si es igual que lo que le paso por el parametro me devolvera para que me devuelva el objeto en el q está
 
 function getSelectedObj(id){
-  console.log(searchList);
     return searchList.find( serie => serie.show.id === Number.parseInt(id) ) 
 }
 
-//7. REcoger el id del item clicado. con (.push) meter el contenido. // no entiendo muy bien poruqé va aqui el setLocalInfo y no al reves
+// Recoger el id del item clicado. con (.push) meter el contenido.
 
 function selectItems(evt){
     const selected = evt.currentTarget.id;
@@ -107,22 +130,22 @@ function selectItems(evt){
 
     if(selectedContent.indexOf(selected)=== -1){
       selectedContent.push(object);
+
       console.log(selectedContent) 
+
       setLocalInfo();
       renderFavourites(selectedContent);
     }
     
-    //Ejecutar la funión para pintar en favoritos
-    removeMovie();
+    removeIt();
 }
 
 
-//8. Pintar favoritos en otra ul //favourite es un string - object es un objecto pero devuelve la id en numero
+//Pintar favoritos en otra ul //favourite es un string - object es un objecto pero devuelve la id en numero
 
 function renderFavourites(FArr){
   favList.innerHTML = '';
   for (let item of FArr){
-  console.log('ENTROOOO');
   
   const li = document.createElement('li');
   const img = document.createElement('img');
@@ -136,7 +159,6 @@ function renderFavourites(FArr){
   img.setAttribute('alt', 'imagen de la serie');
   img.setAttribute('width', '180px');
   
-  //item.show.image.medium
   if(item.show.image !== null && item.show.image !== undefined && item.show.image !== ''){
     img.setAttribute('src', item.show.image.medium);
   } else {
@@ -161,27 +183,22 @@ function renderFavourites(FArr){
   li.appendChild(div);
 
   favList.appendChild(li);
-
-    // favList.innerHTML += `<li class='favList-item'id=${item.show.id}> <img class='favList-item_img' src='${item.show.image.medium}' width='180px;'> <div> <span class='favList-item_title'> ${item.show.name} </span> <button class='fav-button'> x </button> </div></li>`;
   }
   addFavouriteListeners();
 }
-
 
 
 //añado los listeners los botones de borrar
 function addFavouriteListeners(){
   const liListElem = document.querySelectorAll('.fav-button');
   for(let li of liListElem) {
-    li.addEventListener('click', removeMovie);
+    li.addEventListener('click', removeIt);
   }
 }
 
-//función que borra la película
-//me quedo con el id del li
-//me quedo con el índice
-//le paso a splice el índice y 1 como referencia  que elimino un elemento
-function removeMovie(evt){
+// el evt.current target no coge el id, cohe el padre del botón que es el container. el padre del container es el objeto en el que se puede llegar al Id. En el local storage guardo el objeto entero - Hay que cambiar esto.
+
+function removeIt(evt){
   const elemId = evt.currentTarget.parentElement.id;
   const elemIndex = selectedContent.indexOf(elemId);
   selectedContent.splice(elemIndex,1);

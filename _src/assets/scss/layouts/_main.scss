@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding-top:60px;
 }
 
 .main{
     flex-grow: 2;
     padding: 0px 30px 30px 30px;
-    height: 100vh;
+    height: 100%;
     background-color: $secondary-color;
 }
 
@@ -18,6 +19,7 @@
 
 
     .resultList-item{ //es el li
+        max-width: 212px;
         padding: 15px 15px 15px 15px;
         border: 1px solid $primary-color;
         border-radius: 10px;
@@ -28,26 +30,28 @@
             border: 1px solid transparent;
         }
 
-         &_img{ //imd del li
+        &_img{ //imd del li
            width: 180px;
         }
 
-        .span-list{
+        &_content{
             display: flex;
             justify-content: space-between;
 
-        .resultList-item_title{ // title del li
-            margin-top:10px;
-            font-size: 16px;
-            max-width: 130px;
-        }
+            .resultList-item_title{ // title del li
+                margin-top:10px;
+                font-size: 16px;
+                max-width: 160px;
+            }
 
-        .heart{
-            margin-top:10px;
-            height: 16px;
-            width: 16px;
-            cursor: pointer;
+            .resultList-item_heart{
+                //background-image: url(../images/like.png);
+                margin-top:10px;
+                height: 16px;
+                width: 16px;
+                cursor: pointer;
+            }
         }
-    }
     }
 }
+

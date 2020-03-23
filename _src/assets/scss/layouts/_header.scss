@@ -2,7 +2,7 @@
     background-color: $complementaryColor;
 
     .header-container{
-        height: 100vh;
+        height: 990px;
         width: 100%;
         padding:40px;
         display: flex;
@@ -11,7 +11,6 @@
         align-items: center;
         background-color: $primary-color;
         border: 10px solid $secondary-color;
-        border-radius: 5px;
 
         .header-text{
             font-family: $primary-font;
@@ -27,8 +26,7 @@
 }
         
     .main-title{
-    width: 1300px;
-    font-size: 130px;
+    font-size: 8.125rem;
     letter-spacing: 1px;
     font-family: $title-font;
     line-height: 130px;
