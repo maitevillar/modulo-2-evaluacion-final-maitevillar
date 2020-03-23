@@ -54,7 +54,7 @@ function renderList(arr){
       const showObj = item['show'];
       console.log(showObj);
         if(showObj.image === null){
-          resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV" alt="Img error" > <p class='resultList-item_title'>${showObj.name}</p></li>`
+          resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV" alt="Img error" > <span class="span-list"> <p class='resultList-item_title'>${showObj.name}</p> <img class="heart"> </span> </li>`
         } else {
          resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="${showObj.image.medium}" alt="Img error"> <p class='resultList-item_title'>${showObj.name}</p></li>`
      }
