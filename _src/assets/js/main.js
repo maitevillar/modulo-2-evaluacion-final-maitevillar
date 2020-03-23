@@ -54,9 +54,9 @@ function renderList(arr){
       const showObj = item['show'];
       console.log(showObj);
         if(showObj.image === null){
-          resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV" alt="Img error" > <span class="span-list"> <p class='resultList-item_title'>${showObj.name}</p> <img class="heart"> </span> </li>`
+          resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV" alt="Img error"> <span class="span-list"> <p class='resultList-item_title'>${showObj.name}</p> <img class="heart" src="./assets/images/like.png"> </span> </li>`
         } else {
-         resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="${showObj.image.medium}" alt="Img error"> <p class='resultList-item_title'>${showObj.name}</p></li>`
+         resultList.innerHTML += `<li id="${showObj.id}" class='resultList-item'> <img class='resultList-item_img' src="${showObj.image.medium}" alt="Img"> <span class="span-list"> <p class='resultList-item_title'>${showObj.name}</p> <img class="heart" src="./assets/images/like.png"> </span> </li>`
      }
      addClickListeners();
     }
@@ -68,6 +68,7 @@ function renderList(arr){
 
 function addClickListeners(){
     const liListElem = document.querySelectorAll('.resultList-item');
+    const heart = document.querySelectorAll('heart');
     for (let li of liListElem){
         li.addEventListener('click', selectItems)
     }
@@ -106,7 +107,7 @@ function selectItems(evt){
 
     if(selectedContent.indexOf(selected)=== -1){
       selectedContent.push(object);
-      console.log(selectedContent) // es un array con las id's de las pelis seleccionadas(se ejecuta en setlocalinfo)
+      console.log(selectedContent) 
       setLocalInfo();
       renderFavourites(selectedContent);
     }
