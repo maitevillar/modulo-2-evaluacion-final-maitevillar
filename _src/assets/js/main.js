@@ -206,8 +206,30 @@ function removeIt(evt){
   renderFavourites(selectedContent)
 }
 
+var one ="#F5B7B1"
+var two = '#D2B4DE ';
+var three = '#AED6F1';
+var four = '#A2D9CE';
+var five = '#ABEBC6';
+var six = '#FAD7A0';
+var seven = '#EDBB99';
+
+
+var colors = [ one , two, three, four, five, six ];
+var currentIndex = 0;
+var backColor = document.querySelector('.wrapper')
+setInterval(function() {
+	backColor.style.cssText = "background-color: " + colors[currentIndex];
+	currentIndex++;
+	if (currentIndex == undefined || currentIndex >= colors.length) {
+		currentIndex = 0;
+	}
+}, 4000);
+
 // 1. Al pulsar el boton se ejecuta la función que guarda lo que hay dentro del input en una variable
 submitButton.addEventListener('click', searchAction)
 submitButton.addEventListener('click', preventDefault)
+// background.addEventListener('click', gradientColor)
+
 
 renderFavourites(selectedContent);
