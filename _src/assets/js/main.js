@@ -30,7 +30,7 @@ let searchList = null;
 const selectedContent = readLocalStorage();
 
 function loadResults(){
-    fetch(`http://api.tvmaze.com/search/shows?q=${inputValue}`)
+    fetch(`https://api.tvmaze.com/search/shows?q=${inputValue}`)
       .then(response => response.json())
       .then(data => {
         searchList = data;
