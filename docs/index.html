@@ -11,44 +11,42 @@
         rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:900&display=swap"
         rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ae2a63f277.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./assets/css/main.css" />
     </head>
     
     <body>
-        <div class="wrapper">
+        <div class="wrapper" id="wrapper" mouseover=gradientColor()>
             <header class="header">
                 <div class="header-container">
-                    <p class="header-text">Evaluación final - JavaScript</p>
-                    <form id="input-container" method="POST"
-                    action="">
-                        <label for="Name" class="input-title">
-                             <h1 class="main-title"> Buscador de <br>peliculas y series</h1>
+                     <h4 class="header-container__subtitle">tv shows browser</h4>
 
-                        </label>
-                         <h2 class="main-subtitle"> Busca tu pelicula o serie de TV aquí :</h2>
+                     <h1 class="header-container__text">what show are you looking for?</h1>
 
-                        <input id="search-name" name="search" type="text" placeholder="Nombre"> <a href="#main" id="submit-button" type="submit">Buscar</a>
+                    <form class="header-container__input" method="POST" action="">
+                        <input class="header-container__input--fill" id="text-input" name="search"
+                        type="text" placeholder="Nombre de la pelicula o serie"> <a class="header-container__input--btn" id="submit-btn" type="submit"> </a>
 
                     </form>
-                    <p class="header-text">Maite Villar</p>
+                </div>
+                <div class="fav-container">
+                     <h2 class="fav-container__title">favourites</h2>
+
+                    <ul class="fav-container__list" id="fav-list"></ul>
                 </div>
             </header>
-            <div class="page">
-                <main class="main" id="main">
-                    <ul class="result-list">
-                        <!--LLename del resultado-->
-                    </ul>
-                </main>
-                <main class="aside">
-                    <div class="favourties-section">
-                         <h2 class="favourties-title"> Favoritos </h2>
-                        <ul class="favourite-list">
-                            <!--LLename del resultado-->
-                        </ul>
-                    </div>
-                </main>
-            </div>
-            <script src="./assets/js/main.js"></script>
+            <main class="main" id="main">
+                <ul class="main-list" id="result-list"></ul>
+            </main>
+            <footer class="footer">
+                <div class="footer-container">
+                    <p class="footer-container__text">Made with ♥ by Maite Villar</p> <a href="https://github.com/maitevillar?tab=repositories"
+                    target="_blank" alt="github">
+
+        <i class="fab fa-github"> </i> </a>
+                </div>
+                </header>
+                <script src="./assets/js/main.js"></script>
         </div>
     </body>
 
