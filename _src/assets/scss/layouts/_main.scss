@@ -1,57 +1,66 @@
-.page{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding:60px;
-    border-radius: 80px;
-}
 
 .main{
-    flex-grow: 2;
-    padding: 0px 30px 30px 30px;
-    height: 100%;
+    max-width: 100%;
+    padding: 20px 0px 60px 100px;
 }
 
-.result-list{
+.main-list{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: flex-start;
 
-
-    .resultList-item{ //es el li
-        max-width: 212px;
-        padding: 15px 15px 15px 15px;
-        border: 1px solid black;
-        border-radius: 10px;
-        margin: 0px 10px 20px 10px;
+    .resultList-item{
+        margin-bottom: 20px;
+        margin-right: 20px;
+        max-width: 220px;
+        background-color: rgba(44, 44, 44, 0.692);
+        border-radius: 15px;
+        box-shadow: $bgShadow;
         cursor: pointer;
 
-        :hover{
-            border: 1px solid transparent;
+        &_img:hover {
+                box-shadow:  2px 4px 13px 2px rgba(245, 245, 245, 0.63);
         }
 
-        &_img{ //imd del li
-           width: 180px;
+        &_heart:hover{
+            background-image: url('../images/heart-2.png');
+            background-size: cover;
+        }
+        
+        &_img{
+            margin-left: 10px;
+            margin-top: 8px;
+            border-radius: 15px;
+            width: 90%;
+            box-shadow: $bgShadow;
         }
 
         &_content{
+            padding: 30px 10px 20px 10px;
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
+            align-items: center;
 
-            .resultList-item_title{ // title del li
-                margin-top:10px;
-                font-size: 16px;
-                max-width: 160px;
-            }
-
-            .resultList-item_heart{
-                //background-image: url(../images/like.png);
-                margin-top:10px;
-                height: 16px;
-                width: 16px;
-                cursor: pointer;
-            }
         }
-    }
-}
 
+        &_title{
+            max-width: 175px;
+            color: $titleColor;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        &_heart{ 
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            background-image: url('../images/heart-1.png');
+            background-size: cover;
+        }
+        
+    }
+
+}

@@ -1,10 +1,14 @@
 'use strict';
 
 const urlBase = 'http://api.tvmaze.com/search/shows?q=';
-const resultList = document.querySelector('.result-list');
-const favList = document.querySelector('.favourite-list');
-const inputElem = document.querySelector('#search-name');
-const submitButton = document.querySelector('#submit-button');
+const resultList = document.getElementById('result-list');
+
+const inputElem = document.getElementById('text-input');
+const submitButton = document.getElementById('submit-btn');
+
+
+const favList = document.getElementById('fav-list');
+
 
 //Guardar el valor del input en una constante y desabilitar el default del botón:
 
@@ -31,6 +35,7 @@ function loadResults(){
       .then(data => {
         searchList = data;
         renderList(searchList); 
+        console.log(searchList)
       })
   }
 
@@ -44,7 +49,7 @@ function renderList(arr){
    
           const li = document.createElement('li');
           const img = document.createElement('img');
-          const img2 = document.createElement('img');
+          const div1 = document.createElement('div');
           const div = document.createElement('div');
           const p = document.createElement('p');
 
@@ -53,8 +58,8 @@ function renderList(arr){
           img.setAttribute('class', 'resultList-item_img');
           img.setAttribute('alt', 'imagen de la serie');
 
-          img2.setAttribute('class', 'resultList-item_heart');
-          img2.setAttribute('alt', 'icon');
+          div1.setAttribute('class', 'resultList-item_heart');
+          div1.setAttribute('alt', 'icon');
           
           if(showObj.image !== null && showObj.image !== undefined && showObj.image !== ''){
             img.setAttribute('src', showObj.image.medium);
@@ -63,17 +68,14 @@ function renderList(arr){
           }
 
           p.appendChild(text);
-          img2.setAttribute('class', 'resultList-item_heart')
-
-
-          img2.setAttribute('src', './assets/images/like.png')
+          div1.setAttribute('class', 'resultList-item_heart')
         
           p.setAttribute('class', 'resultList-item_title');
           div.setAttribute('class', 'resultList-item_content')
         
         
           div.appendChild(p);
-          div.appendChild(img2);
+          div.appendChild(div1);
 
           li.setAttribute('class', 'resultList-item');
           li.setAttribute('id', item.show.id)
@@ -92,7 +94,7 @@ function renderList(arr){
 //para saber que me esta cogiendo, console.log()
 
 function addClickListeners(){
-    const liListElem = document.querySelectorAll('.resultList-item');
+    const liListElem = document.querySelectorAll('.resultList-item');console.log(liListElem)
     for (let li of liListElem){
         li.addEventListener('click', selectItems)
     }
@@ -146,6 +148,7 @@ function selectItems(evt){
 function renderFavourites(FArr){
   favList.innerHTML = '';
   for (let item of FArr){
+    console.log(item.show)
   
   const li = document.createElement('li');
   const img = document.createElement('img');
@@ -153,7 +156,13 @@ function renderFavourites(FArr){
   const span = document.createElement('span');
   const div = document.createElement('div');
   const favbutton = document.createElement('button');
-  const textButt = document.createTextNode('x');
+  const textButt = document.createTextNode('');
+
+  const list = document.createElement('ul');
+  const liElement = document.createElement('li');
+  const text1 = document.createTextNode(item.show.type + '  ')
+  const text2 = document.createTextNode('|  ' + item.show.rating.average)
+  const text3 = document.createTextNode('')
 
   img.setAttribute('class', 'favList-item_img');
   img.setAttribute('alt', 'imagen de la serie');
@@ -163,6 +172,14 @@ function renderFavourites(FArr){
     img.setAttribute('src', item.show.image.medium);
   } else {
     img.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV')
+  }
+
+  if(item.show.rating.average !== null && item.show.rating.average !== undefined && item.show.rating.average !== ''){
+    liElement.appendChild(text1)
+    liElement.appendChild(text2)
+  } else {
+    liElement.appendChild(text1)
+    liElement.appendChild(text3)
   }
 
   span.appendChild(text);
@@ -175,6 +192,9 @@ function renderFavourites(FArr){
  
   div.appendChild(span);
   div.appendChild(favbutton);
+  div.appendChild(list)
+
+  list.appendChild(liElement)
 
   li.setAttribute('class', 'favList-item');
   li.setAttribute('id', item.show.id)
@@ -183,6 +203,10 @@ function renderFavourites(FArr){
   li.appendChild(div);
 
   favList.appendChild(li);
+
+  list.setAttribute('class', 'favList-item_content--list');
+  liElement.setAttribute('class', 'favList-item_content--list element');
+
   }
   addFavouriteListeners();
 }
@@ -199,32 +223,21 @@ function addFavouriteListeners(){
 // el evt.current target no coge el id, cohe el padre del botón que es el container. el padre del container es el objeto en el que se puede llegar al Id. En el local storage guardo el objeto entero - Hay que cambiar esto.
 
 function removeIt(evt){
-  const elemId = evt.currentTarget.parentElement.id;
-  const elemIndex = selectedContent.indexOf(elemId);
-  selectedContent.splice(elemIndex,1);
+  const elemId = evt.currentTarget.parentElement.parentElement.id;
+  const showArr = []
+
+  for(var i = 0; i < selectedContent.length; i++){
+    const elemIndex = selectedContent[i].show.id;
+    showArr.push(elemIndex);
+  }
+
+  var element = showArr.indexOf(parseInt(elemId))
+  selectedContent.splice(element, 1)
   setLocalInfo();
   renderFavourites(selectedContent)
+
 }
 
-var one ="#F5B7B1"
-var two = '#D2B4DE ';
-var three = '#AED6F1';
-var four = '#A2D9CE';
-var five = '#ABEBC6';
-var six = '#FAD7A0';
-var seven = '#EDBB99';
-
-
-var colors = [ one , two, three, four, five, six ];
-var currentIndex = 0;
-var backColor = document.querySelector('.wrapper')
-setInterval(function() {
-	backColor.style.cssText = "background-color: " + colors[currentIndex];
-	currentIndex++;
-	if (currentIndex == undefined || currentIndex >= colors.length) {
-		currentIndex = 0;
-	}
-}, 4000);
 
 // 1. Al pulsar el boton se ejecuta la función que guarda lo que hay dentro del input en una variable
 submitButton.addEventListener('click', searchAction)

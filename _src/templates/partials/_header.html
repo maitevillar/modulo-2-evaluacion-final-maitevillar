@@ -1,11 +1,15 @@
 <header class="header">
     <div class="header-container">
-        <p class="header-text"> Evaluación final - JavaScript</p>
-        <form id="input-container" method="POST" action="">
-            <label for="Name" class="input-title"><h1 class="main-title"> Buscador de <br>peliculas y series</h1></label>
-            <input id="search-name" name="search" type="text" placeholder="Nombre de la pelicula o serie">
-            <a href="#main" id="submit-button"  type="submit"></a>
-        </form>
-        <p class="header-text"> Maite Villar</p>
+        <h4 class="header-container__subtitle">tv shows browser</h4>
+        <h1 class="header-container__text">what show are you looking for?</h1>
+        <form class="header-container__input" method="POST" action="">
+            <input class="header-container__input--fill" id="text-input" name="search" type="text" placeholder="Nombre de la pelicula o serie">
+            <a class="header-container__input--btn" id="submit-btn" type="submit"> </a>
+        </form>      
+    </div>
+
+    <div class="fav-container">
+        <h2 class="fav-container__title">favourites</h2>
+            <ul class="fav-container__list" id="fav-list"></ul>
     </div>
 </header>

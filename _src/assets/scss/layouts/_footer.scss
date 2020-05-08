@@ -1,0 +1,21 @@
+.footer{
+    border-top: solid 1px white;
+    color: white;
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 10px 40px 10px;
+    position: fixed;
+    bottom: 0px;
+    
+    .footer-container{
+        display: flex;
+        flex-direction: row;
+        font-size: 0.80rem;
+
+        .fa-github{
+            color: rgb(207, 207, 207);
+            padding-left: 10px;
+            cursor: pointer;
+        }
+    }
+}
