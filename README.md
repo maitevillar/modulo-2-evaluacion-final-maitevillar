@@ -1,23 +1,63 @@
-# Evaluación final - JavaScript
+# Tv-show browser
 
-## Cómo poner en marcha:
+_This project is a web application to search for TV series, which allows us to mark the series as favorites and save them in local storage. The exercise also has a layout part with HTML and Sass._ 
 
-Necesitarás instalar [Node.js](https://nodejs.org/) y [Gulp](https://gulpjs.com) para trabajar con este proyecto, luego:
+## How to start 🚀
 
-1. Descarga o clona el repositorio
-2. Instala las dependencias locales con `npm install` (Solo una unica vez)
-3. Arranca con `gulp`
+Install [Node.js](https://nodejs.org/) and [Gulp](https://gulpjs.com) to work with the project, after:
+
+1. Download or clone the repository.
+2. Install the local dependencies `npm install` (Only once)
+3. Run with `gulp`
+
 
 ## Ramas
 
-- Para cambiar de rama se utiliza: `git checkout`
-- Para ver las ramas disponibles: `git branch`
-- Para recorrer las ramas: `git checkout nombre_rama`
+- To change the branch: `git checkout`
+- To see the list of avaiable branches: `git branch`
+- to run the branch: `git checkout nombre_rama`
 
 ## JavaScript
 
-- Este trabajo se desarrolla para el examen al temario 'introducción a JavaScript'
-- Se trabaja lo aprendido durante el modulo 2. La información sobre el temario se puede encontrar aquí:
+- This work is developed for the 'introduction to JavaScript' exam.
+- The information of the materials of this module here 👇
 https://books.adalab.es/materiales-front-end-i/modulo-2.-programando-la-web
 
 
+## Project structure
+
+1. Structure
+
+- Structured and responsive design.
+
+2. Search (Interaction)
+
+- When clicking on the Search button, the application connects to the open TVMaze API for series search. 
+- To build the search URL it gets the text that the user has entered in the search field. 
+- For each show contained in the search result a card is painted. 
+- The information is painted in the page manipulating the DOM from JavaScript. 
+
+3. Favourites section
+
+- Once the search results appear, the user can indicate which are the favourite series. 
+- Favourite series still appears on the left even if the user performs another search.
+- The favourite list is storaged in the local storage.
+- When clicking the 'x' icon of the favourite item, the item is deleted. 
+
+
+##  Librerías
+
+- Font Awesome
+- Google fonts
+- Bootstrap
+- Animate.css
+- Bulma.css
+- Susy
+
+
+## Web images
+
+
+
+---
+Code with ❤️ by Maite Villar. 
