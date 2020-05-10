@@ -2,6 +2,8 @@
 @import 'core/reset';
 
 @import 'utils/variables';
+@import 'utils/dynamic';
+@import 'utils/mixins';
 
 @import 'layouts/header';
 @import 'layouts/main';

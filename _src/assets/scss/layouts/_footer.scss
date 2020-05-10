@@ -4,13 +4,22 @@
     letter-spacing: 1px;
     width: 100%;
     padding: 10px 40px 10px;
-    position: fixed;
-    bottom: 0px;
+
+    @include forTablet {  
+        padding: 10px 40px 0px 0px;  
+        position: fixed;
+        bottom: 0px;
+    }
     
     .footer-container{
         display: flex;
         flex-direction: row;
         font-size: 0.80rem;
+        align-content: center;
+        
+        @include forTablet {  
+            align-content: flex-start;
+        }
 
         .fa-github{
             color: rgb(207, 207, 207);

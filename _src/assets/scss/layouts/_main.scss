@@ -1,14 +1,22 @@
 
 .main{
     max-width: 100%;
-    padding: 20px 0px 60px 100px;
+    padding-bottom: 30px;
+
+    @include forTablet {
+        padding: 20px 0px 60px 100px;
+    }
 }
 
 .main-list{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-evenly;
+
+    @include forTablet {
+        justify-content: flex-start;
+    }
 
     .resultList-item{
         margin-bottom: 20px;

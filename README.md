@@ -2,7 +2,7 @@
 
 _This project is a web application to search for TV series, which allows us to mark the series as favorites and save them in local storage. The exercise also has a layout part with HTML and Sass._ 
 
-## How to start 🚀
+## How to start ☺
 
 Install [Node.js](https://nodejs.org/) and [Gulp](https://gulpjs.com) to work with the project, after:
 
@@ -11,7 +11,7 @@ Install [Node.js](https://nodejs.org/) and [Gulp](https://gulpjs.com) to work wi
 3. Run with `gulp`
 
 
-## Ramas
+## Ramas 
 
 - To change the branch: `git checkout`
 - To see the list of avaiable branches: `git branch`
@@ -20,7 +20,7 @@ Install [Node.js](https://nodejs.org/) and [Gulp](https://gulpjs.com) to work wi
 ## JavaScript
 
 - This work is developed for the 'introduction to JavaScript' exam.
-- The information of the materials of this module here 👇
+- The information of the materials of this module here ☞ 
 https://books.adalab.es/materiales-front-end-i/modulo-2.-programando-la-web
 
 
@@ -60,4 +60,4 @@ https://books.adalab.es/materiales-front-end-i/modulo-2.-programando-la-web
 
 
 ---
-Code with ❤️ by Maite Villar. 
+Code with ❤ by Maite Villar. 

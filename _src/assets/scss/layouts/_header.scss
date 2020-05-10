@@ -1,8 +1,13 @@
 .wrapper{
-    padding: 100px 60px 50px 60px;
+    padding: 70px 40px 0px 40px;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
+    @include forTablet {
+        padding: 100px 60px 50px 60px;
+        flex-direction: row;
+      }
 }
 
 .header{
@@ -14,44 +19,62 @@
 
     .header-container{
         max-width: 450px;
-        margin-left: 20px;
         display: flex;
         flex-direction: column;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
+
+        @include forTablet {
+            margin-bottom: 50px;
+        }
 
         &__subtitle{
             color: $titleColor;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.6rem;
             margin-bottom: 15px;
             letter-spacing: 0.6px;
+
+            @include forTablet {
+                font-size: 0.8rem;
+            }
         }
 
         &__text{
             color: $titleColor;
             text-transform: capitalize;
-            font-size: 3.1666666666666667rem;
-            margin-bottom: 40px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            
+            @include forTablet {
+                font-size: 3.1666666666666667rem;
+                margin-bottom: 40px;
+            }
         }
 
         &__input{
-            padding: 20px 0px;
+            padding: 10px 0px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
 
             &--fill{
-                min-width: 300px;
-                padding: 5px 15px 5px 15px;
+                min-width: 100px;
+                margin-right: 10px;
+                padding: 0px 10px 0px 05px;
                 border-radius: 15px;
                 background-color: rgba(255, 255, 255, 0.555);
                 border: none; 
                 box-shadow: $bgShadow;
                 font-size: 0.83rem;
+
+                @include forTablet {
+                    padding: 5px 15px 5px 15px;
+                    min-width: 300px;
+                }
+
             }
 
             &--btn{
-                margin-right: 20px;
                 padding: 10px 15px 10px 15px;
                 width: 40px;
                 height: 40px;
@@ -70,8 +93,6 @@
 
     .fav-container{
         height: 100%;
-        margin-left: 20px;
-        margin-right: 20px;
         border-top: solid 1px white;
         
 
@@ -80,56 +101,109 @@
             color: white;
             color: $titleColor;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.6rem;
             margin-bottom: 15px;
             letter-spacing: 0.6px;
+            
+            @include forTablet {
+                font-size: 0.8rem;
+            }
         }
 
         &__list{
-            margin-top: 30px
-            ;
+            // display: none;
+            background-color: rgba(211, 211, 211, 0.397);
+            border-radius: 15px;
+            padding: 0px 0px 20px 17px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: left;
+    
+
+            @include forTablet {
+                margin-top: 30px;
+                margin-bottom: 0px;
+                background-color: none ;
+                padding: 10px 0px 20px 15px;
+            }
+
             .favList-item{
                 background-color: rgba(27, 27, 27, 0.781);
                 border-radius: 10px;
                 box-shadow: $bgShadow;
-                margin-top: 10px;
-                padding: 10px 15px 10px 15px;
+                margin: 20px 20px 0px 0px;
+                padding: 10px 0px 10px 10px;
+                width: 40%;
                 display: flex;
+                flex-direction: column;
+                
+                @include forTablet {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                }
 
                 &_img{
                     border-radius: 10px;
-                    width: 20%;
+                    margin-bottom: 8px;
+                    width: 80%;
                     box-shadow: $bgShadow;
+
+                    @include forTablet {
+                        margin-left: 20px;
+                        width: 17%;
+                        margin-bottom: 0px;
+                    }
                 }
 
                 &_content{
                     padding-top: 5px;
                     width: 100%;
-                    margin-left: 30px;
                     color: white;
                     display: flex;
-                    align-items: center;
+                    align-items: left;
                     flex-wrap: wrap;
 
+                    @include forTablet {
+                        margin-left: 30px;
+                    }
+
                     &--list .element{
-                        font-family: $primary-font;
-                        color: rgba(211, 211, 211, 0.801);
-                        padding: 4px;
+                        display: none;
+
+                        @include forTablet {
+                            display: inline-block;
+                            font-size: 0.7rem;
+                            font-family: $primary-font;
+                            color: rgba(211, 211, 211, 0.801);
+                        }
                     }
 
                 }
 
                 &_title{
-                    margin-right: 100px;
+                    margin-right: 8px;
+                    margin-bottom: 5px;
                     color: $titleColor;
-                    font-size: 0.75rem;
+                    font-size: 0.65rem;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
+
+                    @include forTablet {
+                        font-size: 0.9rem;
+                        margin-right: 100px;
+                        margin-bottom: 0px;
+                    }
                 }
 
                 .fav-button{
-                    width: 20px;
-                    height: 20px;
+                    width: 15px;
+                    height: 15px;
+                    margin-right: 5px;
+                    margin-bottom: 5px;
                     background-image: url('../images/delete.png');
                     border-color: transparent;
                     background-size: 40%;
@@ -139,7 +213,13 @@
                     background-color: $bgColor;
                     box-shadow: $bgShadow;
                     cursor: pointer;
-                    margin-right: 100px;
+
+                    @include forTablet {
+                        width: 20px;
+                        height: 20px;
+                        margin-right: 100px;
+                    }
+
                 }
             }
 
