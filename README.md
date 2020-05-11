@@ -2,6 +2,11 @@
 
 _This project is a web application to search for TV series, which allows us to mark the series as favorites and save them in local storage. The exercise also has a layout part with HTML and Sass._ 
 
+## Web images
+
+![web images](/_src/assets/images/tv-show-movbile.jpg)
+![web images](/_src/assets/images/te-show-desktop.jpg)
+
 ## How to start ☺
 
 Install [Node.js](https://nodejs.org/) and [Gulp](https://gulpjs.com) to work with the project, after:
@@ -53,12 +58,6 @@ https://books.adalab.es/materiales-front-end-i/modulo-2.-programando-la-web
 - Animate.css
 - Bulma.css
 - Susy
-
-
-## Web images
-
-![web images](/_src/assets/images/tv-show-movbile.jpg)
-![web images](/_src/assets/images/te-show-desktop.jpg)
 
 ---
 Code with ❤ by Maite Villar. 
