@@ -58,7 +58,7 @@ https://books.adalab.es/materiales-front-end-i/modulo-2.-programando-la-web
 ## Web images
 
 ![web images](/src/assets/images/tv-show-movbile.jpg)
-![web images](/src/assets/images/te.show-desktop.jpg)
+![web images](/src/assets/images/te-show-desktop.jpg)
 
 ---
 Code with ❤ by Maite Villar. 
