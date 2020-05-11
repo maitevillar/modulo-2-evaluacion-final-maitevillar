@@ -6,7 +6,6 @@ _This project is a web application to search for TV series, which allows us to m
 
 ![web images](/_src/assets/images/tv-show-movbile.jpg)
 ![web images](/_src/assets/images/te-show-desktop.jpg)
-![web images](/_src/assets/images/video-tv.gif)
 
 ## How to start ☺
 
@@ -59,6 +58,8 @@ https://books.adalab.es/materiales-front-end-i/modulo-2.-programando-la-web
 - Animate.css
 - Bulma.css
 - Susy
+
+![web images](/_src/assets/images/video-tv.gif)
 
 ---
 Code with ❤ by Maite Villar. 
