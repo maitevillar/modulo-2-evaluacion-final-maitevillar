@@ -16,7 +16,7 @@ Install [Node.js](https://nodejs.org/) and [Gulp](https://gulpjs.com) to work wi
 3. Run with `gulp`
 
 
-## Ramas 
+## Branches 
 
 - To change the branch: `git checkout`
 - To see the list of avaiable branches: `git branch`
@@ -50,7 +50,7 @@ https://books.adalab.es/materiales-front-end-i/modulo-2.-programando-la-web
 - When clicking the 'x' icon of the favourite item, the item is deleted. 
 
 
-##  Librerías
+##  Libraries
 
 - Font Awesome
 - Google fonts
